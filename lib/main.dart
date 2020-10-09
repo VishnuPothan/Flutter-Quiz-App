@@ -1,27 +1,51 @@
 import 'package:flutter/material.dart';
+
+import './question.dart';
+import './answer.dart';
+
 void main(){
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
+}
+
+class _MyAppState extends State<MyApp> {
+  var _quesIndex = 0;
+  void _answerQuestion(){
+    setState(() {
+      _quesIndex = _quesIndex + 1;
+    });
+    print(_quesIndex);
+  }
   @override
   Widget build(BuildContext context) {
-    var question = [
-      'Whats your favourite Color?',
-      'Whats your favourite Animal?'
+    var questions = [
+      {'question' : 'What\'s your favourite Color?',
+       'answers': ['Blue','Red','Orange','White']
+      },
+      {'question' : 'What\'s your favourite Animal?',
+        'answers': ['Hen','Cat','Dog','Monkey']
+      },
+      {'question' : 'What\'s your favourite Country?',
+        'answers': ['India','Canada','japan','Switzerland']
+      },
     ];
     return MaterialApp(home: Scaffold(
       appBar: AppBar(title: Text("The Auto City"),),
         body: Column(
           children: [
-            Text('The Question'),
-            RaisedButton(child: Text("Answer 1"), onPressed: null),
-            RaisedButton(child: Text("Answer 2"), onPressed: null),
-            RaisedButton(child: Text("Answer 3"), onPressed: null),
+            // Question(questions.elementAt(_quesIndex)),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
           ],
         ),
       ),
     );
   }
-
 }
