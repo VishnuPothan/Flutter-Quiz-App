@@ -21,13 +21,20 @@ class _MyAppState extends State<MyApp> {
 
     {
       'question': 'What\'s your favourite Animal?',
-      'answers': [{'text':'Blue' , 'score' : 10},{'text':'Dog', 'score' : 7} ,{'text':'Cow', 'score' : 0}, {'text':'Cat', 'score' : 6} ,{'text':'Elephant', 'score' : 6}]
+      'answers': [{'text':'Dog', 'score' : 7} ,{'text':'Cow', 'score' : 0}, {'text':'Cat', 'score' : 6} ,{'text':'Elephant', 'score' : 6}]
     },
     {
       'question': 'What\'s your favourite Country?',
       'answers': [{'text':'India' , 'score' : 8},{'text':'Japan', 'score' : 10} ,{'text':'Switzerland', 'score' : 10}, {'text':'UK', 'score' : 0} ,{'text':'Israel', 'score' : 4}]
     },
   ];
+
+  void _resetQuiz(){
+    setState(() {
+      _quesIndex = 0;
+      _totalScore = 0;
+    });
+  }
 
   void _answerQuestion(int score) {
     _totalScore += score;
@@ -50,7 +57,7 @@ class _MyAppState extends State<MyApp> {
                 questionIndex: _quesIndex,
                 questions: _questionsAndAnswer,
               )
-            : Result(_totalScore)
+            : Result(_totalScore , _resetQuiz)
       ),
     );
   }
